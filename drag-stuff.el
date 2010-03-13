@@ -42,14 +42,18 @@
   "")
 
 (defun drag-stuff-up (arg)
-  ""
+  "Drag stuff ARG lines up."
   (interactive "p")
-  )
+  (if mark-active
+      (drag-stuff-lines-up arg)
+    (drag-stuff-line-up arg)))
 
 (defun drag-stuff-down (arg)
-  ""
+  "Drag stuff ARG lines down."
   (interactive "p")
-  )
+  (if mark-active
+      (drag-stuff-lines-down arg)
+    (drag-stuff-line-down arg)))
 
 (defun drag-stuff-right (arg)
   ""
@@ -62,12 +66,35 @@
   )
 
 (defun drag-stuff-line-up (arg)
-  ""
-
-  )
+  "Drag current line ARG lines up."
+  (if (> (line-number-at-pos) arg)
+      (let* ((column (current-column))
+             (beg (line-beginning-position))
+             (end (line-end-position))
+             (line (buffer-substring-no-properties beg end)))
+        (delete-region beg end)
+        (backward-delete-char 1)
+        (forward-line (+ (- arg) 1))
+        (goto-char (line-beginning-position))
+        (insert line)
+        (newline)
+        (forward-line -1)
+        (move-to-column column))))
 
 (defun drag-stuff-line-down (arg)
-  ""
+  "Drag current line ARG lines down."
+  (if (<= (+ (line-number-at-pos) arg) (count-lines (point-min) (point-max)))
+      (let* ((column (current-column))
+             (beg (line-beginning-position))
+             (end (line-end-position))
+             (line (buffer-substring-no-properties beg end)))
+        (delete-region beg end)
+        (delete-char 1)
+        (forward-line (- arg 1))
+        (goto-char (line-end-position))
+        (newline)
+        (insert line)
+        (move-to-column column))))
 
   )
 
