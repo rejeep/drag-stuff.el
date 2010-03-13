@@ -48,7 +48,7 @@
 
 (defun drag-stuff-down (arg)
   ""
-  (interactive "p")n
+  (interactive "p")
   )
 
 (defun drag-stuff-right (arg)
