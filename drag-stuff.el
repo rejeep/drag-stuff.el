@@ -153,7 +153,7 @@
        (goto-char old-point)))))
 
 (define-minor-mode drag-stuff-mode
-  ""
+  "Drag stuff around."
   :init-value nil
   :lighter " ds"
   :keymap drag-stuff-mode-map)
