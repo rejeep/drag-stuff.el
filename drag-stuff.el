@@ -76,7 +76,7 @@
 
   )
 
-(defun drag-stuff-lines-right (arg)
+(defun drag-stuff-lines-down (arg)
   ""
 
   )
