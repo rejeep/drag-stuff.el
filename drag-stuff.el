@@ -61,6 +61,46 @@
   (interactive "p")
   )
 
+(defun drag-stuff-line-up (arg)
+  ""
+
+  )
+
+(defun drag-stuff-line-down (arg)
+  ""
+
+  )
+
+(defun drag-stuff-lines-up (arg)
+  ""
+
+  )
+
+(defun drag-stuff-lines-right (arg)
+  ""
+
+  )
+
+(defun drag-stuff-region-left (arg)
+  ""
+
+  )
+
+(defun drag-stuff-region-right (arg)
+  ""
+
+  )
+
+(defun drag-stuff-word-left (arg)
+  ""
+
+  )
+
+(defun drag-stuff-word-right (arg)
+  ""
+
+  )
+
 (define-minor-mode drag-stuff-mode
   ""
   :init-value nil
