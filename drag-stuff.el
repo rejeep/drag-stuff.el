@@ -106,21 +106,23 @@
 
 (defun drag-stuff-lines-up (arg)
   ""
-  
+
   )
 
 (defun drag-stuff-lines-down (arg)
   ""
-  
+
   )
 
 (defun drag-stuff-region-left (arg)
   "Drags region left ARG times."
-  (drag-stuff-region-horizontally (- arg)))
+  (if (> (min (point) (mark)) (point-min))
+      (drag-stuff-region-horizontally (- arg))))
 
 (defun drag-stuff-region-right (arg)
   "Drags region right ARG times."
-  (drag-stuff-region-horizontally arg))
+  (if (< (max (point) (mark)) (point-max))
+      (drag-stuff-region-horizontally arg)))
 
 (defun drag-stuff-region-horizontally (arg)
   "Drags region horizontally ARG times."
