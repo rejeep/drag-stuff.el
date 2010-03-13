@@ -159,10 +159,7 @@
   ""
   :init-value nil
   :lighter " ds"
-  :keymap drag-stuff-mode-map
-  (if drag-stuff-mode
-
-      ))
+  :keymap drag-stuff-mode-map)
 
 (provide 'drag-stuff)
 
