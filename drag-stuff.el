@@ -41,13 +41,33 @@
     map)
   "")
 
+(defun drag-stuff-up (arg)
+  ""
+  (interactive "p")
+  )
+
+(defun drag-stuff-down (arg)
+  ""
+  (interactive "p")n
+  )
+
+(defun drag-stuff-right (arg)
+  ""
+  (interactive "p")
+  )
+
+(defun drag-stuff-left (arg)
+  ""
+  (interactive "p")
+  )
+
 (define-minor-mode drag-stuff-mode
   ""
   :init-value nil
   :lighter " ds"
   :keymap drag-stuff-mode-map
   (if drag-stuff-mode
-      
+
       ))
 
 (provide 'drag-stuff)
