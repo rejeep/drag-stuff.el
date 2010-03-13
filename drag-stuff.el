@@ -106,12 +106,12 @@
 
 (defun drag-stuff-lines-up (arg)
   ""
-
+  
   )
 
 (defun drag-stuff-lines-down (arg)
   ""
-
+  
   )
 
 (defun drag-stuff-region-left (arg)
@@ -151,9 +151,6 @@
           (backward-char offset))
       (error
        (goto-char old-point)))))
-  ""
-
-  )
 
 (define-minor-mode drag-stuff-mode
   ""
