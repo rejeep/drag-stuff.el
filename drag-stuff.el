@@ -126,7 +126,8 @@
   "Drags region horizontally ARG times."
   (let* ((beg (mark))
          (end (point))
-         (region (buffer-substring-no-properties beg end)))
+         (region (buffer-substring-no-properties beg end))
+         (deactivate-mark nil))
     (delete-region beg end)
     (forward-char arg)
     (insert region)
