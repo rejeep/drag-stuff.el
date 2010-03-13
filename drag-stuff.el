@@ -121,11 +121,23 @@
   )
 
 (defun drag-stuff-word-left (arg)
-  ""
-
-  )
+  "Drags word left ARG times."
+  (drag-stuff-word-horizontally (- arg)))
 
 (defun drag-stuff-word-right (arg)
+  "Drags word right ARG times."
+  (drag-stuff-word-horizontally arg))
+
+(defun drag-stuff-word-horizontally (arg)
+  "Drags word horizontally ARG times."
+  (let ((old-point (point))
+        (offset (- (save-excursion (forward-word) (point)) (point))))
+    (condition-case err
+        (progn
+          (transpose-words arg)
+          (backward-char offset))
+      (error
+       (goto-char old-point)))))
   ""
 
   )
