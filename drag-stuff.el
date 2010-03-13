@@ -58,12 +58,16 @@
 (defun drag-stuff-right (arg)
   ""
   (interactive "p")
-  )
+  (if mark-active
+      (drag-stuff-region-right arg)
+    (drag-stuff-word-right arg)))
 
 (defun drag-stuff-left (arg)
   ""
   (interactive "p")
-  )
+  (if mark-active
+      (drag-stuff-region-left arg)
+    (drag-stuff-word-left arg)))
 
 (defun drag-stuff-line-up (arg)
   "Drag current line ARG lines up."
@@ -111,14 +115,23 @@
   )
 
 (defun drag-stuff-region-left (arg)
-  ""
-
-  )
+  "Drags region left ARG times."
+  (drag-stuff-region-horizontally (- arg)))
 
 (defun drag-stuff-region-right (arg)
-  ""
+  "Drags region right ARG times."
+  (drag-stuff-region-horizontally arg))
 
-  )
+(defun drag-stuff-region-horizontally (arg)
+  "Drags region horizontally ARG times."
+  (let* ((beg (mark))
+         (end (point))
+         (region (buffer-substring-no-properties beg end)))
+    (delete-region beg end)
+    (forward-char arg)
+    (insert region)
+    (set-mark (+ beg arg))
+    (goto-char (+ end arg))))
 
 (defun drag-stuff-word-left (arg)
   "Drags word left ARG times."
