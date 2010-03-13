@@ -158,7 +158,7 @@
 (define-minor-mode drag-stuff-mode
   "Drag stuff around."
   :init-value nil
-  :lighter " ds"
+  :lighter " drag"
   :keymap drag-stuff-mode-map)
 
 (provide 'drag-stuff)
