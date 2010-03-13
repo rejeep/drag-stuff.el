@@ -32,6 +32,14 @@
 
 ;;; Code:
 
+(defvar drag-stuff-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "<M-up>") 'drag-stuff-up)
+    (define-key map (kbd "<M-down>") 'drag-stuff-down)
+    (define-key map (kbd "<M-right>") 'drag-stuff-right)
+    (define-key map (kbd "<M-left>") 'drag-stuff-left)
+    map)
+  "")
 
 (define-minor-mode drag-stuff-mode
   ""
