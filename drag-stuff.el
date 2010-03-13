@@ -39,7 +39,7 @@
     (define-key map (kbd "<M-right>") 'drag-stuff-right)
     (define-key map (kbd "<M-left>") 'drag-stuff-left)
     map)
-  "")
+  "Keymap for `drag-stuff-mode'.")
 
 (defun drag-stuff-up (arg)
   "Drag stuff ARG lines up."
@@ -56,14 +56,14 @@
     (drag-stuff-line-down arg)))
 
 (defun drag-stuff-right (arg)
-  ""
+  "Drag stuff ARG lines to the right."
   (interactive "p")
   (if mark-active
       (drag-stuff-region-right arg)
     (drag-stuff-word-right arg)))
 
 (defun drag-stuff-left (arg)
-  ""
+  "Drag stuff ARG lines to the left."
   (interactive "p")
   (if mark-active
       (drag-stuff-region-left arg)
