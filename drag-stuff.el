@@ -29,6 +29,21 @@
 
 ;;; Commentary:
 
+;; drag-stuff is a minor mode for dragging stuff around in Emacs. You
+;; can drag lines, words and region.
+
+;; To use drag-stuff, make sure that this file is in Emacs load-path
+;; (add-to-list 'load-path "/path/to/directory/or/file")
+;;
+;; Then require drag-stuff
+;; (require 'drag-stuff)
+
+;; To start drag-stuff
+;; (drag-stuff-mode t) or M-x drag-stuff-mode
+;;
+;; drag-stuff is buffer local, so hook it up.
+;; (add-hook 'find-file-hook 'wrap-region-mode)
+
 
 ;;; Code:
 
