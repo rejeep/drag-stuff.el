@@ -5,7 +5,7 @@ stuff, such as words, region and lines, around in Emacs.
 ## Installation
 First download the **drag-stuff.el** file. If you use git you can
 fetch it from Github
-    $ git clone git://github.com/rejeep/drag-stuff.git ~/.emacs.d/packages
+    $ git clone git://github.com/rejeep/drag-stuff.git ~/.emacs.d/packages/drag-stuff
     
 Make sure it's in Emacs load-path
     (add-to-list 'load-path "~/.emacs.d/packages/drag-stuff")
