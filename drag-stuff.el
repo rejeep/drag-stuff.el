@@ -102,9 +102,9 @@
 
 (defun drag-stuff-line-vertically (fn)
   "Yields variables used to drag line vertically."
-  (let* ((column (current-column))
-         (beg (line-beginning-position))
-         (end (line-end-position)))
+  (let ((column (current-column))
+        (beg (line-beginning-position))
+        (end (line-end-position)))
     (funcall fn beg end column)))
 
 (defun drag-stuff-lines-up (arg)
