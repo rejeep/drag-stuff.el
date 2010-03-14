@@ -152,7 +152,7 @@
 
 (defun drag-stuff-whole-lines-region ()
   "Return the positions of the region with whole lines included."
-  (let ((beg end))
+  (let (beg end)
     (if (> (point) (mark))
         (exchange-point-and-mark))
     (setq beg (line-beginning-position))
