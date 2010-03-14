@@ -105,14 +105,70 @@
     (funcall fn beg end column line)))
 
 (defun drag-stuff-lines-up (arg)
-  ""
-
-  )
+  "Moves all lines in the selected region ARG lines up."
+  (let ((mark-line (line-number-at-pos (mark)))
+        (point-line (line-number-at-pos (point))))
+    (if (> (min mark-line point-line) arg)
+        (let* ((deactivate-mark nil)
+               (mark-col (save-excursion (exchange-point-and-mark) (current-column)))
+               (point-col (current-column))
+               (bounds (drag-stuff-whole-lines-region))
+               (beg (car bounds))
+               (end (car (cdr bounds)))
+               (region (buffer-substring-no-properties beg end)))
+          (delete-region beg end)
+          (backward-delete-char 1)
+          (forward-line (+ (- arg) 1))
+          (goto-char (line-beginning-position))
+          (insert region)
+          (newline)
+          (forward-line -1)
+          ;; Restore region
+          (goto-line mark-line)
+          (forward-line (- arg))
+          (move-to-column mark-col)
+          (exchange-point-and-mark)
+          (goto-line point-line)
+          (forward-line (- arg))
+          (move-to-column point-col)))))
 
 (defun drag-stuff-lines-down (arg)
-  ""
+  "Moves all lines in the selected region ARG lines up."
+  (let ((mark-line (line-number-at-pos (mark)))
+        (point-line (line-number-at-pos (point))))
+    (if (<= (+ (max mark-line point-line) arg) (count-lines (point-min) (point-max)))
+        (let* ((deactivate-mark nil)
+               (mark-col (save-excursion (exchange-point-and-mark) (current-column)))
+               (point-col (current-column))
+               (bounds (drag-stuff-whole-lines-region))
+               (beg (car bounds))
+               (end (car (cdr bounds)))
+               (region (buffer-substring-no-properties beg end)))
+          (delete-region beg end)
+          (delete-char 1)
+          (forward-line (- arg 1))
+          (goto-char (line-end-position))
+          (newline)
+          (insert region)
+          ;; Restore region
+          (goto-line mark-line)
+          (forward-line arg)
+          (move-to-column mark-col)
+          (exchange-point-and-mark)
+          (goto-line point-line)
+          (forward-line arg)
+          (move-to-column point-col)))))
 
-  )
+(defun drag-stuff-whole-lines-region ()
+  "Return the positions of the region with whole lines included."
+  (let ((beg end))
+    (if (> (point) (mark))
+        (exchange-point-and-mark))
+    (setq beg (line-beginning-position))
+    (if mark-active
+        (exchange-point-and-mark))
+    (setq end (line-end-position))
+    (list beg end)))
 
 (defun drag-stuff-region-left (arg)
   "Drags region left ARG times."
