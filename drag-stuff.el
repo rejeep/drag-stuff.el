@@ -199,6 +199,7 @@
       (error
        (goto-char old-point)))))
 
+;;;###autoload
 (define-minor-mode drag-stuff-mode
   "Drag stuff around."
   :init-value nil
