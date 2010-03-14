@@ -42,7 +42,7 @@
 ;; (drag-stuff-mode t) or M-x drag-stuff-mode
 ;;
 ;; drag-stuff is buffer local, so hook it up.
-;; (add-hook 'find-file-hook 'wrap-region-mode)
+;; (add-hook 'find-file-hook 'drag-stuff-mode)
 
 
 ;;; Code:
