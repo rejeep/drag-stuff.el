@@ -18,7 +18,7 @@ To start drag-stuff
     (drag-stuff-mode t) or M-x drag-stuff-mode
 
 Or if you want it to be done automatically
-    (add-hook 'find-file-hook 'drag-stuff-mode)
+    (drag-stuff-global-mode t)
 
 ### Drag line
 To drag a line up and down. Put the cursor on that line and press
