@@ -221,6 +221,23 @@
   :lighter " drag"
   :keymap drag-stuff-mode-map)
 
+;;;###autoload
+(defun turn-on-drag-stuff-mode ()
+  "Turn on `drag-stuff-mode'"
+  (interactive)
+  (drag-stuff-mode +1))
+
+;;;###autoload
+(defun turn-off-drag-stuff-mode ()
+  "Turn off `drag-stuff-mode'"
+  (interactive)
+  (drag-stuff-mode -1))
+
+;;;###autoload
+(define-globalized-minor-mode drag-stuff-global-mode
+  drag-stuff-mode
+  turn-on-drag-stuff-mode)
+
 (provide 'drag-stuff)
 
 ;;; drag-stuff.el ends here
