@@ -49,6 +49,9 @@
 
 ;;; Code:
 
+(eval-when-compile
+  (require 'cl))
+
 (defvar drag-stuff-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "<M-up>") 'drag-stuff-up)
