@@ -41,9 +41,11 @@
 ;; To start drag-stuff
 ;; (drag-stuff-mode t) or M-x drag-stuff-mode
 ;;
-;; drag-stuff is buffer local, so hook it up.
-;; (add-hook 'find-file-hook 'drag-stuff-mode)
-
+;; drag-stuff is buffer local, so hook it up
+;; (add-hook 'ruby-mode-hook 'drag-stuff-mode)
+;;
+;; Or use the global mode to activate it in all buffers.
+;; (drag-stuff-global-mode t)
 
 ;;; Code:
 
