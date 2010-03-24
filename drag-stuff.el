@@ -92,7 +92,8 @@
       (drag-stuff-line-vertically
        (lambda (beg end column)
          (drag-stuff-drag-region-up beg end arg)
-         (move-to-column column)))))
+         (move-to-column column)))
+    (message "Can not move line further up")))
 
 (defun drag-stuff-line-down (arg)
   "Drag current line ARG lines down."
@@ -100,7 +101,8 @@
       (drag-stuff-line-vertically
        (lambda (beg end column)
          (drag-stuff-drag-region-down beg end arg)
-         (move-to-column column)))))
+         (move-to-column column)))
+    (message "Can not move line further down")))
 
 (defun drag-stuff-line-vertically (fn)
   "Yields variables used to drag line vertically."
@@ -114,14 +116,16 @@
   (if (> (line-number-at-pos (min (point) (mark))) (abs arg))
       (drag-stuff-lines-vertically
        (lambda (beg end)
-         (drag-stuff-drag-region-up beg end arg)))))
+         (drag-stuff-drag-region-up beg end arg)))
+    (message "Can not move lines further up")))
 
 (defun drag-stuff-lines-down (arg)
   "Moves all lines in the selected region ARG lines up."
   (if (<= (+ (line-number-at-pos (max (point) (mark))) arg) (count-lines (point-min) (point-max)))
       (drag-stuff-lines-vertically
        (lambda (beg end)
-         (drag-stuff-drag-region-down beg end arg)))))
+         (drag-stuff-drag-region-down beg end arg)))
+    (message "Can not move lines further down")))
 
 (defun drag-stuff-lines-vertically (fn)
   "Yields variables used to drag lines vertically."
@@ -178,12 +182,14 @@
 (defun drag-stuff-region-left (arg)
   "Drags region left ARG times."
   (if (> (min (point) (mark)) (point-min))
-      (drag-stuff-region-horizontally (- arg))))
+      (drag-stuff-region-horizontally (- arg))
+    (message "Can not move region further to the left")))
 
 (defun drag-stuff-region-right (arg)
   "Drags region right ARG times."
   (if (< (max (point) (mark)) (point-max))
-      (drag-stuff-region-horizontally arg)))
+      (drag-stuff-region-horizontally arg)
+    (message "Can not move region further to the right")))
 
 (defun drag-stuff-region-horizontally (arg)
   "Drags region horizontally ARG times."
@@ -214,6 +220,10 @@
           (transpose-words arg)
           (backward-char offset))
       (error
+       (message
+        (if (> arg 0)
+            "Can not move word further to the right"
+          "Can not move word further to the left"))
        (goto-char old-point)))))
 
 ;;;###autoload
