@@ -4,7 +4,7 @@ Feature: Drag word
   I want to drag it
 
   Background:
-    And I am in buffer "*drag-stuff*"
+    Given I am in buffer "*drag-stuff*"
     And the buffer is empty
     And I insert "word1 word2 word3"
     And there is no region selected

@@ -4,7 +4,7 @@ Feature: Drag region
   I want to drag it
 
   Background:
-    And I am in buffer "*drag-stuff*"
+    Given I am in buffer "*drag-stuff*"
     And the buffer is empty
     And I insert "beforeREGIONafter"
     And there is no region selected

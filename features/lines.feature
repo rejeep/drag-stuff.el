@@ -4,7 +4,7 @@ Feature: Drag lines
   I want to drag them
 
   Background:
-    And I am in buffer "*drag-stuff*"
+    Given I am in buffer "*drag-stuff*"
     And the buffer is empty
     And I insert:
       """
