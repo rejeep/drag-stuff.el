@@ -20,7 +20,7 @@ Feature: Drag Stuff
       """
       (drag-stuff-global-mode t)
       """
-    When I go to line "1"
+    And I go to line "1"
     And I press "<M-down>"
     Then I should see:
       """
