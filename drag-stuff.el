@@ -49,12 +49,24 @@
 
 ;;; Code:
 
+(eval-when-compile
+  (require 'cl))
+
+(defvar drag-stuff-modifier 'meta
+  "Modifier key(s) for bindings in `drag-stuff-mode-map'.")
+
+(defun drag-stuff--kbd (key)
+  (let ((mod (if (listp drag-stuff-modifier)
+		 drag-stuff-modifier
+	       (list drag-stuff-modifier))))
+    (vector (append mod (list key)))))
+
 (defvar drag-stuff-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "<M-up>") 'drag-stuff-up)
-    (define-key map (kbd "<M-down>") 'drag-stuff-down)
-    (define-key map (kbd "<M-right>") 'drag-stuff-right)
-    (define-key map (kbd "<M-left>") 'drag-stuff-left)
+    (define-key map (drag-stuff--kbd 'up) 'drag-stuff-up)
+    (define-key map (drag-stuff--kbd 'down) 'drag-stuff-down)
+    (define-key map (drag-stuff--kbd 'right) 'drag-stuff-right)
+    (define-key map (drag-stuff--kbd 'left) 'drag-stuff-left)
     map)
   "Keymap for `drag-stuff-mode'.")
 
