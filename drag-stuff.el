@@ -55,20 +55,15 @@
 (defvar drag-stuff-modifier 'meta
   "Modifier key(s) for bindings in `drag-stuff-mode-map'.")
 
+(defvar drag-stuff-mode-map (make-sparse-keymap)
+  "Keymap for `drag-stuff-mode'.")
+
+
 (defun drag-stuff--kbd (key)
   (let ((mod (if (listp drag-stuff-modifier)
-		 drag-stuff-modifier
-	       (list drag-stuff-modifier))))
+                 drag-stuff-modifier
+               (list drag-stuff-modifier))))
     (vector (append mod (list key)))))
-
-(defvar drag-stuff-mode-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (drag-stuff--kbd 'up) 'drag-stuff-up)
-    (define-key map (drag-stuff--kbd 'down) 'drag-stuff-down)
-    (define-key map (drag-stuff--kbd 'right) 'drag-stuff-right)
-    (define-key map (drag-stuff--kbd 'left) 'drag-stuff-left)
-    map)
-  "Keymap for `drag-stuff-mode'.")
 
 (defun drag-stuff-up (arg)
   "Drag stuff ARG lines up."
@@ -238,12 +233,21 @@
           "Can not move word further to the left"))
        (goto-char old-point)))))
 
+(defun drag-stuff-define-keys ()
+  "Defines keys for `drag-stuff-mode'."
+  (define-key drag-stuff-mode-map (drag-stuff--kbd 'up) 'drag-stuff-up)
+  (define-key drag-stuff-mode-map (drag-stuff--kbd 'down) 'drag-stuff-down)
+  (define-key drag-stuff-mode-map (drag-stuff--kbd 'right) 'drag-stuff-right)
+  (define-key drag-stuff-mode-map (drag-stuff--kbd 'left) 'drag-stuff-left))
+
 ;;;###autoload
 (define-minor-mode drag-stuff-mode
   "Drag stuff around."
   :init-value nil
   :lighter " drag"
-  :keymap drag-stuff-mode-map)
+  :keymap drag-stuff-mode-map
+  (when drag-stuff-mode
+    (drag-stuff-define-keys)))
 
 ;;;###autoload
 (defun turn-on-drag-stuff-mode ()
@@ -261,6 +265,7 @@
 (define-globalized-minor-mode drag-stuff-global-mode
   drag-stuff-mode
   turn-on-drag-stuff-mode)
+
 
 (provide 'drag-stuff)
 
