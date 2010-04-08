@@ -10,4 +10,18 @@
 (require 'espuds)
 
 (Before
- (setq transient-mark-mode t))
+ ;; Always have transient mark mode active
+ (setq transient-mark-mode t)
+ 
+ ;; Do not use the global mode
+ (drag-stuff-global-mode -1)
+ )
+
+(After
+ ;; Reset the modifier
+ (setq drag-stuff-modifier 'meta)
+
+ ;; Remove all bindings
+ (dolist (direction '(up down left right))
+   (define-key drag-stuff-mode-map (drag-stuff--kbd direction) nil))
+ )
