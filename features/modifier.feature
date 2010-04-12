@@ -26,7 +26,6 @@ Feature: Modifier
       line 1
       line 2
       """
-    And I should see message "<M-down> is undefined"
       
   Scenario: Single modifier key
     When I load the following:
