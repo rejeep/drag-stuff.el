@@ -6,7 +6,6 @@ Feature: Drag Stuff
   Background:
     Given I am in buffer "*drag-stuff*"
     And the buffer is empty
-    And transient mark mode is active
     And there is no region selected
 
   Scenario: Global mode
