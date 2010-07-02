@@ -12,9 +12,11 @@
 (Before
  ;; Always have transient mark mode active
  (setq transient-mark-mode t)
- 
- ;; Do not use the global mode
+
+ ;; Disable drag-stuff
  (drag-stuff-global-mode -1)
+ (drag-stuff-mode -1)
+
  )
 
 (After
