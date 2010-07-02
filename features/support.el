@@ -17,6 +17,11 @@
  (drag-stuff-global-mode -1)
  (drag-stuff-mode -1)
 
+ ;; Kill temporary buffer before each run
+ (let ((buffer "*drag-stuff*"))
+   (if (get-buffer buffer)
+       (kill-buffer buffer)))
+
  )
 
 (After
