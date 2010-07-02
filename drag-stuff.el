@@ -47,6 +47,15 @@
 ;; Or use the global mode to activate it in all buffers.
 ;; (drag-stuff-global-mode t)
 
+;; Default modifier key is the meta-key. This can be changed and is
+;; controlled by the variable `drag-stuff-modifier'.
+;;
+;; Control key as modifier:
+;;   (setq drag-stuff-modifier 'control)
+;;
+;; Meta and Shift keys as modifier:
+;;   (setq drag-stuff-modifier '(meta shift))
+
 ;;; Code:
 
 (eval-when-compile
