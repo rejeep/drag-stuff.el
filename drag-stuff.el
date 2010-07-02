@@ -47,6 +47,13 @@
 ;; Or use the global mode to activate it in all buffers.
 ;; (drag-stuff-global-mode t)
 
+;; Drag Stuff stores a list (`drag-stuff-except-modes') of modes in
+;; which `drag-stuff-mode' should not be activated in (note, only if
+;; you use the global mode) because of conflicting use.
+;;
+;; You can add new except modes:
+;;   (add-to-list 'drag-stuff-except-modes 'conflicting-mode)
+
 ;; Default modifier key is the meta-key. This can be changed and is
 ;; controlled by the variable `drag-stuff-modifier'.
 ;;
@@ -60,6 +67,9 @@
 
 (eval-when-compile
   (require 'cl))
+
+(defvar drag-stuff-except-modes ()
+  "A list of modes in which `drag-stuff-mode' should not be activated.")
 
 (defvar drag-stuff-modifier 'meta
   "Modifier key(s) for bindings in `drag-stuff-mode-map'.")
@@ -262,7 +272,8 @@
 (defun turn-on-drag-stuff-mode ()
   "Turn on `drag-stuff-mode'"
   (interactive)
-  (drag-stuff-mode +1))
+  (unless (member major-mode drag-stuff-except-modes)
+    (drag-stuff-mode +1)))
 
 ;;;###autoload
 (defun turn-off-drag-stuff-mode ()

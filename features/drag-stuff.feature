@@ -26,3 +26,28 @@ Feature: Drag Stuff
       line 2
       line 1
       """
+      
+  Scenario: Global mode except
+    When I load the following:
+      """
+      (setq drag-stuff-except-modes '(text-mode))
+      (drag-stuff-global-mode t)
+      """
+    And major mode is text-mode
+    When I insert:
+      """
+      line 1
+      line 2
+      """
+    And I go to line "1"
+    And I press "<M-down>"
+    Then I should see:
+      """
+      line 1
+      line 2
+      """
+    And I should not see:
+      """
+      line 2
+      line 1
+      """
