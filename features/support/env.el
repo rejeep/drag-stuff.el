@@ -1,6 +1,8 @@
-(let ((current-directory (file-name-directory load-file-name)))
-  (setq drag-stuff-root-path (expand-file-name ".." current-directory))
-  (setq drag-stuff-util-path (expand-file-name "util" drag-stuff-root-path)))
+(let* ((current-directory (file-name-directory load-file-name))
+       (features-directory (expand-file-name ".." current-directory))
+       (project-directory (expand-file-name ".." features-directory)))
+  (setq drag-stuff-root-path project-directory)
+  (setq drag-stuff-util-path (expand-file-name "util" project-directory)))
 
 (add-to-list 'load-path drag-stuff-root-path)
 (add-to-list 'load-path (expand-file-name "ecukes" drag-stuff-util-path))
