@@ -5,7 +5,6 @@
   (setq drag-stuff-util-path (expand-file-name "util" project-directory)))
 
 (add-to-list 'load-path drag-stuff-root-path)
-(add-to-list 'load-path (expand-file-name "ecukes" drag-stuff-util-path))
 (add-to-list 'load-path (expand-file-name "espuds" drag-stuff-util-path))
 
 (require 'drag-stuff)
