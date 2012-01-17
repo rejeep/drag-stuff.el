@@ -10,26 +10,22 @@
 (require 'drag-stuff)
 (require 'espuds)
 
+
 (Before
- ;; Always have transient mark mode active
- (setq transient-mark-mode t)
-
- ;; Disable drag-stuff
- (drag-stuff-global-mode -1)
- (drag-stuff-mode -1)
-
- ;; Kill temporary buffer before each run
- (let ((buffer "*drag-stuff*"))
-   (if (get-buffer buffer)
-       (kill-buffer buffer)))
-
- )
+ (switch-to-buffer
+  (get-buffer-create "*drag-stuff*"))
+ (erase-buffer)
+ (transient-mark-mode 1)
+ (deactivate-mark))
 
 (After
  ;; Reset the modifier
  (setq drag-stuff-modifier 'meta)
 
+ ;; Disable drag-stuff
+ (drag-stuff-global-mode -1)
+ (drag-stuff-mode -1)
+
  ;; Remove all bindings
  (dolist (direction '(up down left right))
-   (define-key drag-stuff-mode-map (drag-stuff--kbd direction) nil))
- )
+   (define-key drag-stuff-mode-map (drag-stuff--kbd direction) nil)))

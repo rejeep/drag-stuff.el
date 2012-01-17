@@ -4,19 +4,16 @@ Feature: Drag line
   I want to drag it
 
   Background:
-    Given I am in buffer "*drag-stuff*"
-    And the buffer is empty
-    And I insert:
+    Given I insert:
       """
       line 1
       line 2
       """
-    And there is no region selected
-    And I enable drag-stuff
+      And I enable drag-stuff
 
   Scenario: Drag line up
     When I go to line "2"
-    And I press "<M-up>"
+     And I press "<M-up>"
     Then I should see:
       """
       line 2
@@ -25,7 +22,7 @@ Feature: Drag line
 
   Scenario: Drag line down
     When I go to line "1"
-    And I press "<M-down>"
+     And I press "<M-down>"
     Then I should see:
       """
       line 2
@@ -34,20 +31,20 @@ Feature: Drag line
 
   Scenario: Drag line down out of scope
     When I go to line "2"
-    And I press "<M-down>"
+     And I press "<M-down>"
     Then I should see:
       """
       line 1
       line 2
       """
-    And I should see message "Can not move line further down"
+     And I should see message "Can not move line further down"
 
   Scenario: Drag line up out of scope
     When I go to line "1"
-    And I press "<M-up>"
+     And I press "<M-up>"
     Then I should see:
       """
       line 1
       line 2
       """
-    And I should see message "Can not move line further up"
+     And I should see message "Can not move line further up"
