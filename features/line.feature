@@ -9,11 +9,10 @@ Feature: Drag line
       line 1
       line 2
       """
-      And I enable drag-stuff
+      And I turn on drag-stuff
 
   Scenario: Drag line up
-    When I go to line "2"
-     And I press "<M-up>"
+    When I drag line "2" up
     Then I should see:
       """
       line 2
@@ -21,8 +20,7 @@ Feature: Drag line
       """
 
   Scenario: Drag line down
-    When I go to line "1"
-     And I press "<M-down>"
+    When I drag line "1" down
     Then I should see:
       """
       line 2
@@ -30,8 +28,7 @@ Feature: Drag line
       """
 
   Scenario: Drag line down out of scope
-    When I go to line "2"
-     And I press "<M-down>"
+    When I drag line "2" down
     Then I should see:
       """
       line 1
@@ -40,8 +37,7 @@ Feature: Drag line
      And I should see message "Can not move line further down"
 
   Scenario: Drag line up out of scope
-    When I go to line "1"
-     And I press "<M-up>"
+    When I drag line "1" up
     Then I should see:
       """
       line 1

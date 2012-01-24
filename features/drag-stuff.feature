@@ -4,18 +4,14 @@ Feature: Drag Stuff
   I want to drag them
 
   Scenario: Global mode
-    When I open temp file "global"
+    When I turn on drag-stuff globaly
+     And I open temp file "global"
      And I insert:
        """
        line 1
        line 2
        """
-     And I load the following:
-       """
-       (drag-stuff-global-mode t)
-       """
-     And I go to line "1"
-     And I press "<M-down>"
+    When I drag line "1" down
     Then I should see:
       """
       line 2
@@ -23,26 +19,17 @@ Feature: Drag Stuff
       """
 
   Scenario: Global mode except
-    When I load the following:
-      """
-      (setq drag-stuff-except-modes '(text-mode))
-      (drag-stuff-global-mode t)
-      """
-     And major mode is text-mode
-    When I insert:
+    When I turn on drag-stuff globaly
+     And I add "text-mode" as an except mode
+     And I turn on text-mode
+     And I insert:
       """
       line 1
       line 2
       """
-     And I go to line "1"
-     And I press "<M-down>"
+     And I drag line "1" down
     Then I should see:
       """
       line 1
       line 2
       """
-     And I should not see:
-       """
-       line 2
-       line 1
-       """

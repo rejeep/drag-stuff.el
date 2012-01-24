@@ -10,13 +10,10 @@ Feature: Drag lines
       line 2
       line 3
       """
-    And I enable drag-stuff
+    And I turn on drag-stuff
 
   Scenario: Drag lines up
-    When I go to point "10"
-     And I set the mark
-     And I go to point "17"
-    When I press "<M-up>"
+    When I drag lines "2" to "3" up
     Then I should see:
       """
       line 2
@@ -25,15 +22,12 @@ Feature: Drag lines
       """
      And the region should be:
        """
-       ne 2
-       li
+       line 2
+       
        """
 
   Scenario: Drag lines down
-    When I go to point "3"
-     And I set the mark
-     And I go to point "10"
-    When I press "<M-down>"
+    When I drag lines "1" to "2" down
     Then I should see:
       """
       line 3
@@ -42,15 +36,12 @@ Feature: Drag lines
       """
      And the region should be:
        """
-       ne 1
-       li
+       line 1
+       
        """
 
   Scenario: Drag lines up out of scope
-    When I go to point "3"
-     And I set the mark
-     And I go to point "10"
-    When I press "<M-up>"
+    When I drag lines "1" to "2" up
     Then I should see:
       """
       line 1
@@ -60,15 +51,12 @@ Feature: Drag lines
      And I should see message "Can not move lines further up"
      And the region should be:
        """
-       ne 1
-       li
+       line 1
+       
        """
 
   Scenario: Drag lines down out of scope
-    When I go to point "10"
-     And I set the mark
-     And I go to point "17"
-    When I press "<M-down>"
+    When I drag lines "2" to "3" down
     Then I should see:
       """
       line 1
@@ -78,6 +66,6 @@ Feature: Drag lines
      And I should see message "Can not move lines further down"
      And the region should be:
        """
-       ne 2
-       li
+       line 2
+       
        """
