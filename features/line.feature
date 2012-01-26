@@ -3,13 +3,13 @@ Feature: Drag line
   As an emacs user
   I want to drag it
 
-  Background:
+  Background: 
     Given I insert:
       """
       line 1
       line 2
       """
-      And I turn on drag-stuff
+    And I turn on drag-stuff
 
   Scenario: Drag line up
     When I drag line "2" up
@@ -34,7 +34,7 @@ Feature: Drag line
       line 1
       line 2
       """
-     And I should see message "Can not move line further down"
+    And I should see message "Can not move line further down"
 
   Scenario: Drag line up out of scope
     When I drag line "1" up
@@ -43,4 +43,5 @@ Feature: Drag line
       line 1
       line 2
       """
-     And I should see message "Can not move line further up"
+    And I should see message "Can not move line further up"
+

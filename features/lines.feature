@@ -3,7 +3,7 @@ Feature: Drag lines
   As an emacs user
   I want to drag them
 
-  Background:
+  Background: 
     Given I insert:
       """
       line 1
@@ -20,11 +20,11 @@ Feature: Drag lines
       line 3
       line 1
       """
-     And the region should be:
-       """
-       line 2
-       
-       """
+    And the region should be:
+      """
+      line 2
+
+      """
 
   Scenario: Drag lines down
     When I drag lines "1" to "2" down
@@ -34,11 +34,11 @@ Feature: Drag lines
       line 1
       line 2
       """
-     And the region should be:
-       """
-       line 1
-       
-       """
+    And the region should be:
+      """
+      line 1
+
+      """
 
   Scenario: Drag lines up out of scope
     When I drag lines "1" to "2" up
@@ -48,12 +48,12 @@ Feature: Drag lines
       line 2
       line 3
       """
-     And I should see message "Can not move lines further up"
-     And the region should be:
-       """
-       line 1
-       
-       """
+    And I should see message "Can not move lines further up"
+    And the region should be:
+      """
+      line 1
+
+      """
 
   Scenario: Drag lines down out of scope
     When I drag lines "2" to "3" down
@@ -63,9 +63,10 @@ Feature: Drag lines
       line 2
       line 3
       """
-     And I should see message "Can not move lines further down"
-     And the region should be:
-       """
-       line 2
-       
-       """
+    And I should see message "Can not move lines further down"
+    And the region should be:
+      """
+      line 2
+
+      """
+

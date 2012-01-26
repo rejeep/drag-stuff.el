@@ -5,12 +5,12 @@ Feature: Drag Stuff
 
   Scenario: Global mode
     When I turn on drag-stuff globaly
-     And I open temp file "global"
-     And I insert:
-       """
-       line 1
-       line 2
-       """
+    And I open temp file "global"
+    And I insert:
+      """
+      line 1
+      line 2
+      """
     When I drag line "1" down
     Then I should see:
       """
@@ -20,16 +20,17 @@ Feature: Drag Stuff
 
   Scenario: Global mode except
     When I turn on drag-stuff globaly
-     And I add "text-mode" as an except mode
-     And I turn on text-mode
-     And I insert:
+    And I add "text-mode" as an except mode
+    And I turn on text-mode
+    And I insert:
       """
       line 1
       line 2
       """
-     And I drag line "1" down
+    And I drag line "1" down
     Then I should see:
       """
       line 1
       line 2
       """
+

@@ -3,9 +3,9 @@ Feature: Drag word
   As an emacs user
   I want to drag it
 
-  Background:
+  Background: 
     Given I insert "word1 word2 word3"
-      And I turn on drag-stuff
+    And I turn on drag-stuff
 
   Scenario: Drag word left
     When I drag word "word3" left
@@ -18,9 +18,10 @@ Feature: Drag word
   Scenario: Drag word left out of scope
     When I drag word "word1" left
     Then I should see "word1 word2 word3"
-     And I should see message "Can not move word further to the left"
+    And I should see message "Can not move word further to the left"
 
   Scenario: Drag word right out of scope
     When I drag word "word3" right
     Then I should see "word1 word2 word3"
-     And I should see message "Can not move word further to the right"
+    And I should see message "Can not move word further to the right"
+
