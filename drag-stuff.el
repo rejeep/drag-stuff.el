@@ -79,6 +79,7 @@
 
 
 (defun drag-stuff--kbd (key)
+  "Key binding helper."
   (let ((mod (if (listp drag-stuff-modifier)
                  drag-stuff-modifier
                (list drag-stuff-modifier))))
@@ -140,7 +141,7 @@
     (funcall fn beg end column)))
 
 (defun drag-stuff-lines-up (arg)
-  "Moves all lines in the selected region ARG lines up."
+  "Move all lines in the selected region ARG lines up."
   (if (> (line-number-at-pos (min (point) (mark))) (abs arg))
       (drag-stuff-lines-vertically
        (lambda (beg end)
@@ -148,7 +149,7 @@
     (message "Can not move lines further up")))
 
 (defun drag-stuff-lines-down (arg)
-  "Moves all lines in the selected region ARG lines up."
+  "Move all lines in the selected region ARG lines up."
   (if (<= (+ (line-number-at-pos (max (point) (mark))) arg) (count-lines (point-min) (point-max)))
       (drag-stuff-lines-vertically
        (lambda (beg end)
@@ -272,14 +273,14 @@
 
 ;;;###autoload
 (defun turn-on-drag-stuff-mode ()
-  "Turn on `drag-stuff-mode'"
+  "Turn on `drag-stuff-mode'."
   (interactive)
   (unless (member major-mode drag-stuff-except-modes)
     (drag-stuff-mode +1)))
 
 ;;;###autoload
 (defun turn-off-drag-stuff-mode ()
-  "Turn off `drag-stuff-mode'"
+  "Turn off `drag-stuff-mode'."
   (interactive)
   (drag-stuff-mode -1))
 
