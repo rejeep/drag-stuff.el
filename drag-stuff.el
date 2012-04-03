@@ -87,16 +87,18 @@
 (defun drag-stuff-up (arg)
   "Drag stuff ARG lines up."
   (interactive "p")
-  (if mark-active
-      (drag-stuff-lines-up (- arg))
-    (drag-stuff-line-up (- arg))))
+  (let ((auto-fill-function nil))
+    (if mark-active
+        (drag-stuff-lines-up (- arg))
+      (drag-stuff-line-up (- arg)))))
 
 (defun drag-stuff-down (arg)
   "Drag stuff ARG lines down."
   (interactive "p")
-  (if mark-active
-      (drag-stuff-lines-down arg)
-    (drag-stuff-line-down arg)))
+  (let ((auto-fill-function nil))
+    (if mark-active
+        (drag-stuff-lines-down arg)
+      (drag-stuff-line-down arg))))
 
 (defun drag-stuff-right (arg)
   "Drag stuff ARG lines to the right."
