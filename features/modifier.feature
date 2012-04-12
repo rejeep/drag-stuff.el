@@ -16,7 +16,7 @@ Feature: Modifier
       """
       (setq drag-stuff-modifier 'control)
       """
-    And I enable drag-stuff
+    And I turn on drag-stuff
     And I press "<M-down>"
     Then I should not see:
       """
@@ -34,7 +34,7 @@ Feature: Modifier
       """
       (setq drag-stuff-modifier 'control)
       """
-    And I enable drag-stuff
+    And I turn on drag-stuff
     When I press "<C-down>"
     Then I should see:
       """
@@ -47,7 +47,7 @@ Feature: Modifier
       """
       (setq drag-stuff-modifier '(meta shift))
       """
-    And I enable drag-stuff
+    And I turn on drag-stuff
     When I press "<M-S-down>"
     Then I should see:
       """
