@@ -37,14 +37,14 @@ For more information, see comments in `drag-stuff.el`.
 
 ## Contribution
 Contribution is much welcome! Drag stuff is tested using [Ecukes](http://ecukes.info). When
-Adding New features, please write tests for them!
+adding new features, please write tests for them!
 
-To fetch Ecukes:
+Install [carton](https://github.com/rejeep/carton) if you haven't
+already, then:
 
     $ cd /path/to/drag-stuff
-    $ git submodule init
-    $ git submodule update
-    
-Run the tests with:
+    $ carton
 
-    $ ./util/ecukes/ecukes features
+Run all tests with:
+
+    $ make
