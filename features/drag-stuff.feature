@@ -22,15 +22,5 @@ Feature: Drag Stuff
     When I turn on drag-stuff globaly
     And I add "text-mode" as an except mode
     And I turn on text-mode
-    And I insert:
-      """
-      line 1
-      line 2
-      """
-    And I drag line "1" down
-    Then I should see:
-      """
-      line 1
-      line 2
-      """
+    Then drag-stuff should not be active
 

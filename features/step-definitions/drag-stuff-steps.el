@@ -44,3 +44,7 @@
 (When "^I drag \\(?:lines?\\|word\\|region\\) \\(up\\|down\\|left\\|right\\)$"
       (lambda (direction)
         (When "I press \"%s\"" (format "<M-%s>" direction))))
+
+(Then "^drag-stuff should not be active$"
+       (lambda ()
+         (assert (not drag-stuff-mode) nil "Expected drag-stuff to not be active, but it was")))
