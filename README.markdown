@@ -2,6 +2,8 @@
 Drag Stuff is a minor mode for Emacs that makes it possible to drag
 stuff (words, region, lines) around in Emacs.
 
+[<img src="http://img.youtube.com/vi/KCy1sjUPwwg/0.jpg">](https://www.youtube.com/watch?v=KCy1sjUPwwg)
+
 ## Installation
 I recommend installing via ELPA, but manual installation is simple as well:
 
