@@ -22,3 +22,22 @@ Feature: Drag Stuff
           ;; ...
           ))
       """
+
+  Scenario: Electric indent mode
+    Given I insert:
+      """
+      class Foo
+        end
+        def bar
+      end
+      """
+    And I turn on drag-stuff
+    And I turn on electric-indent-mode
+    And I drag line "2" down
+    Then I should see:
+      """
+      class Foo
+        def bar
+        end
+      end
+      """
