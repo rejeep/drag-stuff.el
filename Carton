@@ -1,6 +1,6 @@
 (source "melpa" "http://melpa.milkbox.net/packages/")
 
-(package "drag-stuff" "0.0.4" "Drag stuff (lines, words, region, etc...) around")
+(package "drag-stuff" "0.0.5" "Drag stuff (lines, words, region, etc...) around")
 
 (development
  (depends-on "ecukes")
