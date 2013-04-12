@@ -22,5 +22,5 @@ Feature: Drag Stuff
     When I turn on drag-stuff globaly
     And I add "text-mode" as an except mode
     And I turn on text-mode
-    Then drag-stuff should not be active
+    Then drag-stuff-mode should not be active
 

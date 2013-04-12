@@ -45,6 +45,8 @@
       (lambda (direction)
         (When "I press \"%s\"" (format "<M-%s>" direction))))
 
-(Then "^drag-stuff should not be active$"
-       (lambda ()
-         (assert (not drag-stuff-mode) nil "Expected drag-stuff to not be active, but it was")))
+(Then "^\\(.+\\) should not be active$"
+       (lambda (mode)
+         (let* ((symbol (intern mode))
+                (active (and (boundp symbol) (symbol-value symbol))))
+           (assert (not active) nil "Expected %s to not be active, but it was" mode))))
