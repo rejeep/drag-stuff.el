@@ -49,4 +49,4 @@
        (lambda (mode)
          (let* ((symbol (intern mode))
                 (active (and (boundp symbol) (symbol-value symbol))))
-           (assert (not active) nil "Expected %s to not be active, but it was" mode))))
+           (should-not active))))

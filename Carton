@@ -6,3 +6,4 @@
  (depends-on "ecukes")
  (depends-on "espuds")
  (depends-on "ruby-mode")
+ (depends-on "ert"))
