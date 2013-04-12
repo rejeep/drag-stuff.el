@@ -26,6 +26,7 @@
  (drag-stuff-global-mode -1)
  (drag-stuff-mode -1)
 
+ (auto-fill-mode -1)
  (electric-indent-mode -1)
 
  ;; Remove all bindings
