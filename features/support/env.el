@@ -29,6 +29,7 @@
 
  (auto-fill-mode -1)
  (electric-indent-mode -1)
+ (longlines-mode -1)
 
  ;; Remove all bindings
  (dolist (direction '(up down left right))

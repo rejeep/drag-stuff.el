@@ -85,23 +85,33 @@
                (list drag-stuff-modifier))))
     (vector (append mod (list key)))))
 
+(defmacro drag-stuff--execute (&rest body)
+  "Execute BODY without conflicting modes."
+  `(let ((auto-fill-function nil)
+         (electric-indent-mode nil)
+         (longlines-mode-active
+          (and (boundp 'longlines-mode) longlines-mode)))
+     (when longlines-mode-active
+       (longlines-mode -1))
+     ,@body
+     (when longlines-mode-active
+       (longlines-mode 1))))
+
 (defun drag-stuff-up (arg)
   "Drag stuff ARG lines up."
   (interactive "p")
-  (let ((auto-fill-function nil)
-        (electric-indent-mode nil))
-    (if mark-active
-        (drag-stuff-lines-up (- arg))
-      (drag-stuff-line-up (- arg)))))
+  (drag-stuff--execute
+   (if mark-active
+       (drag-stuff-lines-up (- arg))
+     (drag-stuff-line-up (- arg)))))
 
 (defun drag-stuff-down (arg)
   "Drag stuff ARG lines down."
   (interactive "p")
-  (let ((auto-fill-function nil)
-        (electric-indent-mode nil))
-    (if mark-active
-        (drag-stuff-lines-down arg)
-      (drag-stuff-line-down arg))))
+  (drag-stuff--execute
+   (if mark-active
+       (drag-stuff-lines-down arg)
+     (drag-stuff-line-down arg))))
 
 (defun drag-stuff-right (arg)
   "Drag stuff ARG lines to the right."

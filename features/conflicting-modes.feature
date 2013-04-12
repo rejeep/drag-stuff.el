@@ -47,3 +47,49 @@ Feature: Drag Stuff
       | direction | line |
       | down      |    2 |
       | up        |    3 |
+
+  Scenario: Longlines mode down
+    Given I insert:
+      """
+      Move me down please
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique sollicitudin massa, ut porta diam pellentesque et. Sed porttitor tempor egestas. Morbi accumsan quam sed elit auctor nec interdum mi tincidunt.
+      """
+    And I turn on drag-stuff
+    And I turn on longlines-mode
+    And I drag line "1" down
+    Then I should see:
+      """
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique
+      sollicitudin massa, ut porta diam pellentesque et. Sed porttitor
+      tempor egestas. Morbi accumsan quam sed elit auctor nec interdum mi
+      tincidunt.
+      Move me down please
+      """
+
+  Scenario: Longlines mode up
+    Given I insert:
+      """
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique sollicitudin massa, ut porta diam pellentesque et. Sed porttitor tempor egestas. Morbi accumsan quam sed elit auctor nec interdum mi tincidunt.
+      Move me down please
+      """
+    And I turn on drag-stuff
+    And I turn on longlines-mode
+    And I drag line "5" up
+    Then I should see:
+      """
+      Move me down please
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique
+      sollicitudin massa, ut porta diam pellentesque et. Sed porttitor
+      tempor egestas. Morbi accumsan quam sed elit auctor nec interdum mi
+      tincidunt.
+      """
+
+  Scenario: Do not activate longlines if not previously active
+    Given I insert:
+      """
+      Lorem
+      Ipsum
+      """
+    And I turn on drag-stuff
+    And I drag line "1" down
+    Then longlines-mode should not be active
