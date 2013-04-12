@@ -23,21 +23,27 @@ Feature: Drag Stuff
           ))
       """
 
-  Scenario: Electric indent mode
+  Scenario Outline: Electric indent mode
     Given I insert:
       """
       class Foo
-        end
-        def bar
+      end
+      def bar
       end
       """
+    And I turn on ruby-mode
     And I turn on drag-stuff
     And I turn on electric-indent-mode
-    And I drag line "2" down
+    And I drag line "<line>" <direction>
     Then I should see:
       """
       class Foo
-        def bar
-        end
+      def bar
+      end
       end
       """
+
+    Examples:
+      | direction | line |
+      | down      |    2 |
+      | up        |    3 |

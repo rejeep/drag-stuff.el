@@ -88,7 +88,8 @@
 (defun drag-stuff-up (arg)
   "Drag stuff ARG lines up."
   (interactive "p")
-  (let ((auto-fill-function nil))
+  (let ((auto-fill-function nil)
+        (electric-indent-mode nil))
     (if mark-active
         (drag-stuff-lines-up (- arg))
       (drag-stuff-line-up (- arg)))))

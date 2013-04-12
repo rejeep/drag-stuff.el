@@ -26,6 +26,8 @@
  (drag-stuff-global-mode -1)
  (drag-stuff-mode -1)
 
+ (electric-indent-mode -1)
+
  ;; Remove all bindings
  (dolist (direction '(up down left right))
    (define-key drag-stuff-mode-map (drag-stuff--kbd direction) nil)))
