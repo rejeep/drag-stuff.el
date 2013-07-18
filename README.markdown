@@ -1,4 +1,4 @@
-# Drag Stuff
+# Drag Stuff [![Build Status](https://api.travis-ci.org/rejeep/drag-stuff.png?branch=master)](http://travis-ci.org/rejeep/drag-stuff)
 Drag Stuff is a minor mode for Emacs that makes it possible to drag
 stuff (words, region, lines) around in Emacs.
 

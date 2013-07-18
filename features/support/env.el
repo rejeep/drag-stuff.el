@@ -1,16 +1,15 @@
-(let* ((current-directory (file-name-directory load-file-name))
-       (features-directory (expand-file-name ".." current-directory))
-       (project-directory (expand-file-name ".." features-directory)))
-  (setq drag-stuff-root-path project-directory)
-  (setq drag-stuff-util-path (expand-file-name "util" project-directory)))
+(require 'f)
 
-(add-to-list 'load-path drag-stuff-root-path)
-(add-to-list 'load-path (expand-file-name "espuds" drag-stuff-util-path))
+(let* ((this-directory (f-dirname load-file-name))
+       (drag-stuff-root-path (f-parent (f-parent this-directory)))
+       (drag-stuff-vendor-path (f-expand "vendor" drag-stuff-root-path)))
+  (add-to-list 'load-path drag-stuff-root-path)
+  (unless (require 'ert nil 'noerror)
+    (require 'ert (f-expand "ert" drag-stuff-vendor-path))))
 
 (require 'ert)
 (require 'drag-stuff)
 (require 'espuds)
-
 
 (Before
  (switch-to-buffer

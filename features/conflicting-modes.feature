@@ -23,6 +23,7 @@ Feature: Drag Stuff
           ))
       """
 
+  @not-in-emacs-23
   Scenario Outline: Electric indent mode
     Given I insert:
       """
