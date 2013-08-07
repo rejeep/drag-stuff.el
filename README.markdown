@@ -41,11 +41,11 @@ For more information, see comments in `drag-stuff.el`.
 Contribution is much welcome! Drag stuff is tested using [Ecukes](http://ecukes.info). When
 adding new features, please write tests for them!
 
-Install [carton](https://github.com/rejeep/carton) if you haven't
+Install [cask](https://github.com/rejeep/cask.el) if you haven't
 already, then:
 
     $ cd /path/to/drag-stuff
-    $ carton
+    $ cask
 
 Run all tests with:
 

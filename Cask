@@ -1,4 +1,4 @@
-(source "melpa" "http://melpa.milkbox.net/packages/")
+(source melpa)
 
 (package "drag-stuff" "0.0.6" "Drag stuff (lines, words, region, etc...) around")
 
