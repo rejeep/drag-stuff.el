@@ -26,6 +26,10 @@
  (drag-stuff-global-mode -1)
  (drag-stuff-mode -1)
 
+ ;; Reset hooks
+ (setq drag-stuff-before-drag-hook nil)
+ (setq drag-stuff-after-drag-hook nil)
+
  (auto-fill-mode -1)
  (if (fboundp 'electric-indent-mode)
      (electric-indent-mode -1))
