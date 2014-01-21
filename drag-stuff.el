@@ -77,6 +77,11 @@
 (defvar drag-stuff-mode-map (make-sparse-keymap)
   "Keymap for `drag-stuff-mode'.")
 
+(defvar drag-stuff-before-drag-hook nil
+  "Called before dragging occurs.")
+
+(defvar drag-stuff-after-drag-hook nil
+  "Called after dragging occurs.")
 
 (defun drag-stuff--kbd (key)
   "Key binding helper."
@@ -93,7 +98,9 @@
           (and (boundp 'longlines-mode) longlines-mode)))
      (when longlines-mode-active
        (longlines-mode -1))
+     (run-hooks 'drag-stuff-before-drag-hook)
      ,@body
+     (run-hooks 'drag-stuff-after-drag-hook)
      (when longlines-mode-active
        (longlines-mode 1))))
 
