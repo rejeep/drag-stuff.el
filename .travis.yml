@@ -7,9 +7,9 @@ before_install:
   - cask
 env:
   - EVM_EMACS=emacs-23.4-bin TAGS="--tags ~@not-in-emacs-23"
-  # - EVM_EMACS=emacs-24.1-bin
-  # - EVM_EMACS=emacs-24.2-bin
   - EVM_EMACS=emacs-24.3-bin
+  - EVM_EMACS=emacs-24.4-bin
+  - EVM_EMACS=emacs-24.5-bin TAGS="--tags ~@not-in-emacs-24.5"
 script:
   - emacs --version
   - make test

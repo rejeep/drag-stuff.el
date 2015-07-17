@@ -49,6 +49,7 @@ Feature: Drag Stuff
       | down      |    2 |
       | up        |    3 |
 
+  @not-in-emacs-24.5
   Scenario: Longlines mode down
     Given I insert:
       """
@@ -67,6 +68,7 @@ Feature: Drag Stuff
       Move me down please
       """
 
+  @not-in-emacs-24.5
   Scenario: Longlines mode up
     Given I insert:
       """

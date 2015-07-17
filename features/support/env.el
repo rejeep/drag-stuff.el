@@ -33,7 +33,8 @@
  (auto-fill-mode -1)
  (if (fboundp 'electric-indent-mode)
      (electric-indent-mode -1))
- (longlines-mode -1)
+ (if (fboundp 'longlines-mode)
+     (longlines-mode -1))
 
  ;; Remove all bindings
  (dolist (direction '(up down left right))
