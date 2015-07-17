@@ -83,6 +83,12 @@
 (defvar drag-stuff-after-drag-hook nil
   "Called after dragging occurs.")
 
+;; save-mark-and-excursion in Emacs 25 works like save-excursion did before
+(eval-when-compile
+  (when (not (fboundp #'save-mark-and-excursion))
+    (defmacro save-mark-and-excursion (&rest body)
+      `(save-excursion ,@body))))
+
 (defun drag-stuff--kbd (key)
   "Key binding helper."
   (let ((mod (if (listp drag-stuff-modifier)
@@ -180,7 +186,7 @@
   (let* ((deactivate-mark nil)
          (mark-line (line-number-at-pos (mark)))
          (point-line (line-number-at-pos (point)))
-         (mark-col (save-excursion (exchange-point-and-mark) (current-column)))
+         (mark-col (save-mark-and-excursion (exchange-point-and-mark) (current-column)))
          (point-col (current-column))
          (bounds (drag-stuff-whole-lines-region))
          (beg (car bounds))
@@ -262,7 +268,7 @@
 (defun drag-stuff-word-horizontally (arg)
   "Drags word horizontally ARG times."
   (let ((old-point (point))
-        (offset (- (save-excursion (forward-word) (point)) (point))))
+        (offset (- (save-mark-and-excursion (forward-word) (point)) (point))))
     (condition-case err
         (progn
           (transpose-words arg)
