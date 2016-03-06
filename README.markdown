@@ -19,6 +19,12 @@ or
 
     M-x drag-stuff-mode
 
+To enable drag-stuff globally, use:
+
+```lisp
+(drag-stuff-global-mode 1)
+```
+
 ### Drag line
 To drag a line up and down. Put the cursor on that line and press
 `<M-up>` and `<M-down>`.
