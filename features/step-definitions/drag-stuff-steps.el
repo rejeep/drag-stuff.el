@@ -50,3 +50,23 @@
          (let* ((symbol (intern mode))
                 (active (and (boundp symbol) (symbol-value symbol))))
            (should-not active))))
+
+(Given "^I turn on evil$"
+       (lambda ()
+         (turn-on-evil-mode)))
+
+(When "^I evil select region \\([0-9]+\\):\\([0-9]+\\)$"
+      (lambda (start end)
+        (When "I go to point \"%s\"" start)
+        (And "I call \"evil-visual-char\"")
+        (And "I go to point \"%s\"" end)))
+
+(When "^I evil select lines \\([0-9]+\\):\\([0-9]+\\)$"
+      (lambda (start end)
+        (When "I go to line \"%s\"" start)
+        (And "I call \"evil-visual-char\"")
+        (And "I go to line \"%s\"" end)))
+
+(When "^I evil drag \\(up\\|down\\|left\\|right\\)$"
+      (lambda (direction)
+        (When "I press \"%s\"" (format "<M-%s>" direction))))

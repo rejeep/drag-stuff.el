@@ -89,12 +89,40 @@
     (defmacro save-mark-and-excursion (&rest body)
       `(save-excursion ,@body))))
 
+(defun drag-stuff--evil-p ()
+  "Predicate for checking if we're in evil visual state."
+  (and (bound-and-true-p evil-mode) (evil-visual-state-p)))
+
 (defun drag-stuff--kbd (key)
   "Key binding helper."
   (let ((mod (if (listp drag-stuff-modifier)
                  drag-stuff-modifier
                (list drag-stuff-modifier))))
     (vector (append mod (list key)))))
+
+(defun drag-stuff--mark-line ()
+  "Returns the line number where mark (first char selected) is."
+  (if (and evilp (< (point) (mark)))
+      (line-number-at-pos (save-mark-and-excursion (evil-visual-goto-end)))
+    (line-number-at-pos (mark))))
+
+(defun drag-stuff--point-line ()
+  "Returns the line number where point (current selected char) is."
+  (if (and evilp (> (point) (mark)))
+      (line-number-at-pos (save-mark-and-excursion (evil-visual-goto-end)))
+    (line-number-at-pos (point))))
+
+(defun drag-stuff--mark-col ()
+  "Returns the column number where mark (first char selected) is."
+  (if (and evilp (< (point) (mark)))
+      (save-mark-and-excursion (evil-visual-goto-end) (current-column))
+    (save-mark-and-excursion (exchange-point-and-mark) (current-column))))
+
+(defun drag-stuff--point-col ()
+  "Returns the column number where point (current selected char) is."
+  (if (and evilp (> (point) (mark)))
+      (save-mark-and-excursion (evil-visual-goto-end) (current-column))
+    (current-column)))
 
 (defmacro drag-stuff--execute (&rest body)
   "Execute BODY without conflicting modes."
@@ -167,7 +195,7 @@
 
 (defun drag-stuff-lines-up (arg)
   "Move all lines in the selected region ARG lines up."
-  (if (> (line-number-at-pos (min (point) (mark))) (abs arg))
+  (if (> (line-number-at-pos (region-beginning)) (abs arg))
       (drag-stuff-lines-vertically
        (lambda (beg end)
          (drag-stuff-drag-region-up beg end arg)))
@@ -175,22 +203,27 @@
 
 (defun drag-stuff-lines-down (arg)
   "Move all lines in the selected region ARG lines up."
-  (if (<= (+ (line-number-at-pos (max (point) (mark))) arg) (count-lines (point-min) (point-max)))
-      (drag-stuff-lines-vertically
-       (lambda (beg end)
-         (drag-stuff-drag-region-down beg end arg)))
-    (message "Can not move lines further down")))
+  (let ((selection-end (if (drag-stuff--evil-p)
+                           (save-mark-and-excursion (evil-visual-goto-end))
+                         (region-end))))
+    (if (<= (+ (line-number-at-pos selection-end) arg) (count-lines (point-min) (point-max)))
+        (drag-stuff-lines-vertically
+         (lambda (beg end)
+           (drag-stuff-drag-region-down beg end arg)))
+      (message "Can not move lines further down"))))
 
 (defun drag-stuff-lines-vertically (fn)
   "Yields variables used to drag lines vertically."
-  (let* ((deactivate-mark nil)
-         (mark-line (line-number-at-pos (mark)))
-         (point-line (line-number-at-pos (point)))
-         (mark-col (save-mark-and-excursion (exchange-point-and-mark) (current-column)))
-         (point-col (current-column))
-         (bounds (drag-stuff-whole-lines-region))
-         (beg (car bounds))
-         (end (car (cdr bounds))))
+  (let* ((evilp      (drag-stuff--evil-p))
+         (mark-line  (drag-stuff--mark-line))
+         (point-line (drag-stuff--point-line))
+         (mark-col   (drag-stuff--mark-col))
+         (point-col  (drag-stuff--point-col))
+         (bounds     (drag-stuff-whole-lines-region))
+         (beg        (car bounds))
+         (end        (car (cdr bounds)))
+         (deactivate-mark nil))
+
     (funcall fn beg end)
     ;; Restore region
     (goto-line mark-line)
@@ -199,11 +232,14 @@
     (exchange-point-and-mark)
     (goto-line point-line)
     (forward-line arg)
-    (move-to-column point-col)))
+    (move-to-column point-col)
+    (when evilp
+      (evil-visual-make-selection (mark) (point)))))
 
 (defun drag-stuff-drag-region-up (beg end arg)
   "Drags region between BEG and END ARG lines up."
   (let ((region (buffer-substring-no-properties beg end)))
+    (when (drag-stuff--evil-p) (evil-exit-visual-state))
     (delete-region beg end)
     (backward-delete-char 1)
     (forward-line (+ arg 1))
@@ -215,6 +251,7 @@
 (defun drag-stuff-drag-region-down (beg end arg)
   "Drags region between BEG and END ARG lines down."
   (let ((region (buffer-substring-no-properties beg end)))
+    (when (drag-stuff--evil-p) (evil-exit-visual-state))
     (delete-region beg end)
     (delete-char 1)
     (forward-line (- arg 1))
@@ -225,12 +262,16 @@
 (defun drag-stuff-whole-lines-region ()
   "Return the positions of the region with whole lines included."
   (let (beg end)
-    (if (> (point) (mark))
-        (exchange-point-and-mark))
-    (setq beg (line-beginning-position))
-    (if mark-active
-        (exchange-point-and-mark))
-    (setq end (line-end-position))
+    (cond (evilp
+           (setq beg (save-mark-and-excursion (goto-char (region-beginning)) (line-beginning-position)))
+           (setq end (save-mark-and-excursion (evil-visual-goto-end) (line-end-position))))
+          (t
+           (if (> (point) (mark))
+               (exchange-point-and-mark))
+           (setq beg (line-beginning-position))
+           (if mark-active
+               (exchange-point-and-mark))
+           (setq end (line-end-position))))
     (list beg end)))
 
 (defun drag-stuff-region-left (arg)
