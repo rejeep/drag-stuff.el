@@ -100,28 +100,26 @@
                (list drag-stuff-modifier))))
     (vector (append mod (list key)))))
 
-(defun drag-stuff--mark-line ()
+(defun drag-stuff--line-at-mark ()
   "Returns the line number where mark (first char selected) is."
-  (if (and evilp (< (point) (mark)))
-      (line-number-at-pos (save-mark-and-excursion (evil-visual-goto-end)))
-    (line-number-at-pos (mark))))
+  (line-number-at-pos
+   (if evilp evil-visual-mark (mark))))
 
-(defun drag-stuff--point-line ()
+(defun drag-stuff--line-at-point ()
   "Returns the line number where point (current selected char) is."
-  (if (and evilp (> (point) (mark)))
-      (line-number-at-pos (save-mark-and-excursion (evil-visual-goto-end)))
-    (line-number-at-pos (point))))
+  (line-number-at-pos
+   (if evilp evil-visual-point (point))))
 
-(defun drag-stuff--mark-col ()
+(defun drag-stuff--col-at-mark ()
   "Returns the column number where mark (first char selected) is."
-  (if (and evilp (< (point) (mark)))
-      (save-mark-and-excursion (evil-visual-goto-end) (current-column))
+  (if evilp
+      (save-mark-and-excursion (goto-char evil-visual-mark) (current-column))
     (save-mark-and-excursion (exchange-point-and-mark) (current-column))))
 
-(defun drag-stuff--point-col ()
+(defun drag-stuff--col-at-point ()
   "Returns the column number where point (current selected char) is."
-  (if (and evilp (> (point) (mark)))
-      (save-mark-and-excursion (evil-visual-goto-end) (current-column))
+  (if evilp
+      (save-mark-and-excursion (goto-char evil-visual-point) (current-column))
     (current-column)))
 
 (defmacro drag-stuff--execute (&rest body)
@@ -214,14 +212,15 @@
 
 (defun drag-stuff-lines-vertically (fn)
   "Yields variables used to drag lines vertically."
-  (let* ((evilp      (drag-stuff--evil-p))
-         (mark-line  (drag-stuff--mark-line))
-         (point-line (drag-stuff--point-line))
-         (mark-col   (drag-stuff--mark-col))
-         (point-col  (drag-stuff--point-col))
-         (bounds     (drag-stuff-whole-lines-region))
-         (beg        (car bounds))
-         (end        (car (cdr bounds)))
+  (let* ((evilp (drag-stuff--evil-p))
+         (vtype (evil-visual-type))
+         (mark-line (drag-stuff--line-at-mark))
+         (point-line (drag-stuff--line-at-point))
+         (mark-col (drag-stuff--col-at-mark))
+         (point-col (drag-stuff--col-at-point))
+         (bounds (drag-stuff-whole-lines-region))
+         (beg (car bounds))
+         (end (car (cdr bounds)))
          (deactivate-mark nil))
 
     (funcall fn beg end)
@@ -234,7 +233,9 @@
     (forward-line arg)
     (move-to-column point-col)
     (when evilp
-      (evil-visual-make-selection (mark) (point)))))
+      (evil-visual-make-selection (mark) (point))
+      (when (eq vtype 'line) (evil-visual-line (mark) (point))))))
+
 
 (defun drag-stuff-drag-region-up (beg end arg)
   "Drags region between BEG and END ARG lines up."
