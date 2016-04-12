@@ -213,7 +213,7 @@
 (defun drag-stuff-lines-vertically (fn)
   "Yields variables used to drag lines vertically."
   (let* ((evilp (drag-stuff--evil-p))
-         (vtype (evil-visual-type))
+         (vtype (if evilp (evil-visual-type) nil))
          (mark-line (drag-stuff--line-at-mark))
          (point-line (drag-stuff--line-at-point))
          (mark-col (drag-stuff--col-at-mark))
