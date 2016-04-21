@@ -71,10 +71,6 @@
         (And "I go to line \"%s\"" endline)
         (forward-char (- (string-to-number endcol) 1))))
 
-(When "^I evil drag \\(up\\|down\\|left\\|right\\)$"
-      (lambda (direction)
-        (When "I press \"%s\"" (format "<M-%s>" direction))))
-
 (Then "^the evil point should be at point \\([0-9]+\\)$"
   (lambda (point)
     (let ((message "Expected point to be at point '%s', but was at '%s'"))

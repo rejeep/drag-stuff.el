@@ -9,7 +9,7 @@ Feature: Drag Stuff for Evil Mode
     And I turn on evil-mode
     And I turn on drag-stuff
     And I evil select region <beg>:<end>
-    And I evil drag <direction>
+    And I drag region <direction>
     Then I should see:
       """
       <text>
@@ -36,8 +36,8 @@ Feature: Drag Stuff for Evil Mode
     And I turn on evil-mode
     And I turn on drag-stuff
     And I evil select region <beg>:<end>
-    And I evil drag <direction>
-    And I evil drag <direction>
+    And I drag region <direction>
+    And I drag region <direction>
     Then I should see:
       """
       line 3
@@ -68,8 +68,8 @@ Feature: Drag Stuff for Evil Mode
     And I turn on evil-mode
     And I turn on drag-stuff
     And I evil select lines <begline>:<endline> at column <begcol>:<endcol>
-    And I evil drag <direction>
-    And I evil drag <direction>
+    And I drag lines <direction>
+    And I drag lines <direction>
     Then I should see:
       """
       line 3
@@ -98,7 +98,7 @@ Feature: Drag Stuff for Evil Mode
     And I turn on evil-mode
     And I turn on drag-stuff
     And I evil select region <beg>:<end>
-    And I evil drag <direction>
+    And I drag region <direction>
     Then I should see:
       """
       line 1
@@ -126,7 +126,7 @@ Feature: Drag Stuff for Evil Mode
     And I turn on evil-mode
     And I turn on drag-stuff
     And I evil select lines <begline>:<endline> at column <begcol>:<endcol>
-    And I evil drag <direction>
+    And I drag lines <direction>
     Then I should see:
       """
       line 1
