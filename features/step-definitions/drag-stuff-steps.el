@@ -57,16 +57,30 @@
 
 (When "^I evil select region \\([0-9]+\\):\\([0-9]+\\)$"
       (lambda (start end)
-        (When "I go to point \"%s\"" start)
-        (And "I call \"evil-visual-char\"")
-        (And "I go to point \"%s\"" end)))
+        (setq start (string-to-number start))
+        (setq end (string-to-number end))
+        (evil-visual-select start end)
+        (when (< end start)
+          (evil-visual-exchange-corners))))
 
-(When "^I evil select lines \\([0-9]+\\):\\([0-9]+\\)$"
-      (lambda (start end)
-        (When "I go to line \"%s\"" start)
-        (And "I call \"evil-visual-char\"")
-        (And "I go to line \"%s\"" end)))
+(When "^I evil select lines \\([0-9]+\\):\\([0-9]+\\) at column \\([0-9]+\\):\\([0-9]+\\)$"
+      (lambda (begline endline begcol endcol)
+        (When "I go to line \"%s\"" begline)
+        (forward-char (- (string-to-number begcol) 1))
+        (And "I call \"evil-visual-line\"")
+        (And "I go to line \"%s\"" endline)
+        (forward-char (- (string-to-number endcol) 1))))
 
 (When "^I evil drag \\(up\\|down\\|left\\|right\\)$"
       (lambda (direction)
         (When "I press \"%s\"" (format "<M-%s>" direction))))
+
+(Then "^the evil point should be at point \\([0-9]+\\)$"
+  (lambda (point)
+    (let ((message "Expected point to be at point '%s', but was at '%s'"))
+      (cl-assert (= (string-to-number point) evil-visual-point) nil message point evil-visual-point))))
+
+(Then "^the evil mark should be at point \\([0-9]+\\)$"
+  (lambda (point)
+    (let ((message "Expected mark to be at point '%s', but was at '%s'"))
+      (cl-assert (= (string-to-number point) evil-visual-mark) nil message point evil-visual-mark))))
