@@ -10,6 +10,7 @@
 (require 'ert)
 (require 'drag-stuff)
 (require 'espuds)
+(require 'evil)
 
 (Before
  (switch-to-buffer
@@ -35,6 +36,9 @@
      (electric-indent-mode -1))
  (if (fboundp 'longlines-mode)
      (longlines-mode -1))
+
+ (if (fboundp 'evil-mode)
+     (evil-mode -1))
 
  ;; Remove all bindings
  (dolist (direction '(up down left right))
