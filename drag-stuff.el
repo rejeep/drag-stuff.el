@@ -136,6 +136,7 @@
      (when longlines-mode-active
        (longlines-mode 1))))
 
+;;;###autoload
 (defun drag-stuff-up (arg)
   "Drag stuff ARG lines up."
   (interactive "p")
@@ -144,6 +145,7 @@
        (drag-stuff-lines-up (- arg))
      (drag-stuff-line-up (- arg)))))
 
+;;;###autoload
 (defun drag-stuff-down (arg)
   "Drag stuff ARG lines down."
   (interactive "p")
@@ -152,6 +154,7 @@
        (drag-stuff-lines-down arg)
      (drag-stuff-line-down arg))))
 
+;;;###autoload
 (defun drag-stuff-right (arg)
   "Drag stuff ARG lines to the right."
   (interactive "p")
@@ -159,6 +162,7 @@
       (drag-stuff-region-right arg)
     (drag-stuff-word-right arg)))
 
+;;;###autoload
 (defun drag-stuff-left (arg)
   "Drag stuff ARG lines to the left."
   (interactive "p")
