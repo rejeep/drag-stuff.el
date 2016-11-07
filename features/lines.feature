@@ -11,6 +11,7 @@ Feature: Drag lines
       line 3
       """
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
 
   Scenario: Drag lines up
     When I drag lines "2" to "3" up

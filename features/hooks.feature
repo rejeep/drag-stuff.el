@@ -9,6 +9,7 @@ Feature: Hooks
       line 4
       """
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
 
   Scenario: Before and after wrap hooks
     Given I load the following:

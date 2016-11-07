@@ -338,9 +338,7 @@
   "Drag stuff around."
   :init-value nil
   :lighter " drag"
-  :keymap drag-stuff-mode-map
-  (when drag-stuff-mode
-    (drag-stuff-define-keys)))
+  :keymap drag-stuff-mode-map)
 
 ;;;###autoload
 (defun turn-on-drag-stuff-mode ()

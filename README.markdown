@@ -25,6 +25,13 @@ To enable drag-stuff globally, use:
 (drag-stuff-global-mode 1)
 ```
 
+### Suggested key-bindings
+To activate the suggested key-bindings, `<M-up>`, `<M-down>`, `<M-right>`, `<M-left>`, use:
+
+```lisp
+(drag-stuff-define-keys)
+```
+
 ### Drag line
 To drag a line up and down. Put the cursor on that line and press
 `<M-up>` and `<M-down>`.

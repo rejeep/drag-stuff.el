@@ -6,6 +6,7 @@ Feature: Drag region
   Background: 
     Given I insert "beforeREGIONafter"
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
 
   Scenario: Drag region left
     When I drag region "REGION" left

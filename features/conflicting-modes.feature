@@ -12,6 +12,7 @@ Feature: Drag Stuff
           ))
       """
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
     And I turn on auto-fill-mode
     And I drag line "3" up
     Then I should see:
@@ -34,6 +35,7 @@ Feature: Drag Stuff
       """
     And I turn on ruby-mode
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
     And I turn on electric-indent-mode
     And I drag line "<line>" <direction>
     Then I should see:
@@ -57,6 +59,7 @@ Feature: Drag Stuff
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique sollicitudin massa, ut porta diam pellentesque et. Sed porttitor tempor egestas. Morbi accumsan quam sed elit auctor nec interdum mi tincidunt.
       """
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
     And I turn on longlines-mode
     And I drag line "1" down
     Then I should see:
@@ -76,6 +79,7 @@ Feature: Drag Stuff
       Move me down please
       """
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
     And I turn on longlines-mode
     And I drag line "5" up
     Then I should see:
@@ -94,5 +98,6 @@ Feature: Drag Stuff
       Ipsum
       """
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
     And I drag line "1" down
     Then longlines-mode should not be active

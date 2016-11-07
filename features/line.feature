@@ -10,6 +10,7 @@ Feature: Drag line
       line 2
       """
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
 
   Scenario: Drag line up
     When I drag line "2" up

@@ -17,6 +17,7 @@ Feature: Modifier
       (setq drag-stuff-modifier 'control)
       """
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
     When I press "<C-down>"
     Then I should see:
       """
@@ -30,6 +31,7 @@ Feature: Modifier
       (setq drag-stuff-modifier '(meta shift))
       """
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
     When I press "<M-S-down>"
     Then I should see:
       """

@@ -8,6 +8,7 @@ Feature: Drag Stuff for Evil Mode
       """
     And I turn on evil-mode
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
     And I evil select region <beg>:<end>
     And I drag region <direction>
     Then I should see:
@@ -35,6 +36,7 @@ Feature: Drag Stuff for Evil Mode
       """
     And I turn on evil-mode
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
     And I evil select region <beg>:<end>
     And I drag region <direction>
     And I drag region <direction>
@@ -67,6 +69,7 @@ Feature: Drag Stuff for Evil Mode
       """
     And I turn on evil-mode
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
     And I evil select lines <begline>:<endline> at column <begcol>:<endcol>
     And I drag lines <direction>
     And I drag lines <direction>
@@ -97,6 +100,7 @@ Feature: Drag Stuff for Evil Mode
       """
     And I turn on evil-mode
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
     And I evil select region <beg>:<end>
     And I drag region <direction>
     Then I should see:
@@ -125,6 +129,7 @@ Feature: Drag Stuff for Evil Mode
       """
     And I turn on evil-mode
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
     And I evil select lines <begline>:<endline> at column <begcol>:<endcol>
     And I drag lines <direction>
     Then I should see:
