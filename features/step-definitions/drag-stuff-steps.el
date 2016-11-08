@@ -6,6 +6,10 @@
        (lambda ()
          (drag-stuff-mode 1)))
 
+(Given "^I activate the suggested drag-stuff key-bindings$"
+       (lambda ()
+         (drag-stuff-define-keys)))
+
 (Given "^I turn off drag-stuff$"
        (lambda ()
          (drag-stuff-mode -1)))

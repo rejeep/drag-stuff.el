@@ -6,6 +6,7 @@ Feature: Drag word
   Background: 
     Given I insert "word1 word2 word3"
     And I turn on drag-stuff
+    And I activate the suggested drag-stuff key-bindings
 
   Scenario: Drag word left
     When I drag word "word3" left

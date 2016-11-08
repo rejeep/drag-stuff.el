@@ -5,6 +5,7 @@ Feature: Drag Stuff
 
   Scenario: Global mode
     When I turn on drag-stuff globaly
+    And I activate the suggested drag-stuff key-bindings
     And I open temp file "global"
     And I insert:
       """
@@ -20,6 +21,7 @@ Feature: Drag Stuff
 
   Scenario: Global mode except
     When I turn on drag-stuff globaly
+    And I activate the suggested drag-stuff key-bindings
     And I add "text-mode" as an except mode
     And I turn on text-mode
     Then drag-stuff-mode should not be active
